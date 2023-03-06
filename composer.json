@@ -55,7 +55,7 @@
             "*": "dist"
         },
         "sort-packages": true,
-        "platform-check": false        
+        "platform-check": false
     },
     "autoload": {
         "psr-4": {

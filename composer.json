@@ -55,9 +55,7 @@
             "*": "dist"
         },
         "sort-packages": true,
-        "platform": {
-            "php": ">=7.2.5"
-        }
+        "platform-check": false
     },
     "autoload": {
         "psr-4": {

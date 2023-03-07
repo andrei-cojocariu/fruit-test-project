@@ -46,7 +46,7 @@ class Fruits
     public function getName(): ?string
     {
         return $this->name;
-    }
+    } 
 
     public function getFvId(): ?int
     {

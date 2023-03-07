@@ -35,7 +35,7 @@ class Fruits
     #[ORM\Column]
     private ?int $status = null;
 
-    #[ORM\OneToOne(mappedBy: 'fruit_id', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'fruit', cascade: ['persist', 'remove'])]
     private ?FruitNutritions $fn_id = null;
 
     public function getId(): ?int

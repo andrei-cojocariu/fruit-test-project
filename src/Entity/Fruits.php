@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FruitsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Fruits
 {
     #[ORM\Id]
@@ -25,6 +26,9 @@ class Fruits
 
     #[ORM\Column(length: 255)]
     private ?string $fruit_order = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $genus = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_updated = null;
@@ -91,6 +95,18 @@ class Fruits
         return $this;
     }
 
+    public function getGenus(): ?string
+    {
+        return $this->genus;
+    }
+
+    public function setGenus(string $genus): self
+    {
+        $this->genus = $genus;
+
+        return $this;
+    }
+
     public function getDateUpdated(): ?\DateTimeInterface
     {
         return $this->date_updated;
@@ -134,11 +150,6 @@ class Fruits
 
     public function setFnId(FruitNutritions $fn_id): self
     {
-        // set the owning side of the relation if necessary
-        if ($fn_id->getFruitId() !== $this) {
-            $fn_id->setFruitId($this);
-        }
-
         $this->fn_id = $fn_id;
 
         return $this;
@@ -148,6 +159,7 @@ class Fruits
     public function onPrePersist(): void
     {
         $this->date_created = new \DateTime("now");
+        $this->date_updated = $this->date_created;
     }
 
     #[ORM\PreUpdate]

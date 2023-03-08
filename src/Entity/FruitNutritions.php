@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FruitNutritionsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class FruitNutritions
 {
     #[ORM\Id]
@@ -159,6 +160,7 @@ class FruitNutritions
     public function onPrePersist(): void
     {
         $this->date_created = new \DateTime("now");
+        $this->date_updated = $this->date_created;
     }
 
     #[ORM\PreUpdate]
